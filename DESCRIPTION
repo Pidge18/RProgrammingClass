@@ -1,0 +1,15 @@
+Package: FPSCalculations
+Type: Package
+Title: Streamlines calculations needing to be done for analysis done on 
+FPS Video Games
+Version: 0.1.0
+Author: Evan Robert Arias-Johnson
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: This package looks to streamline calculations needing to be made 
+when it comes to doing analysis on video games, specifically first person shootes. 
+This package looks to provide a Time-to-Kill calculation, Standardization 
+and Normalization used to compare different weapons to one another. 
+There are plans on adding more calculations over time as well. 
+License: CC0
+Encoding: UTF-8
+LazyData: true
