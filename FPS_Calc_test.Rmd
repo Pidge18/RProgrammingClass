@@ -1,0 +1,134 @@
+---
+title: "FPS_Calculations"
+author: "Evan Arias-Johnon"
+date: "2024-03-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Function 1: TTK_Calc
+
+The calculation wants to know how fast a weapon in game could optimally take down an opponent. The arguemets are as followed:
+
+RPM - Rounds per Minute 
+Shots to Eliminate Opponent - Bullets Required 
+
+How the formula looks: `(60/RPM)*(Shots_Required - 1)`
+```{r cars}
+
+TTK_Calc <- function(RPM,Shots_Required){
+  #Rounding to produce the first 2 decimal places
+  Time_to_kill <- round((60/RPM)*(Shots_Required - 1),2)
+  return(Time_to_kill)
+}
+
+#Rounds Per Minute
+RPM <- 140
+
+#Shots Required to Kill
+Shots_Required <- 3
+
+#using the Function 
+TTK_Calc(X,Y)
+
+
+```
+Function 2: Bullets_to_Eliminate 
+
+So technically, you could use this function first to determine shots_to_elimante in the function listed before. The arguments are as followed:
+
+- Total_Health -> Total Player Health (In the game I )
+- DPB -> Damage per Bullet
+
+
+Eventually I would like to help determine how many Headshots to body shots is required, but this is a start. 
+
+
+
+```{r pressure, echo=FALSE}
+Bullets_to_Elimination <- function(Total_Health,DPB){
+  #Rounding to produce the first decimal place
+  BtE <- round((Total_Health/DPB),1)
+    #If the Mod of BtE is not equal to ZERO
+     if ((BtE %% 1) != 0) {
+       #Then take the mod of BtE and subtract 1 from it
+        BtE_Remainder <- 1 - (BtE %% 1)
+        #Then take BtE and add the remainder to it so you get to the nearest whole number
+        BtE <- BtE + BtE_Remainder
+     } else {
+       #If it prints a clean value, just print BtE
+       BtE <- BtE
+     }
+  return(BtE)
+}
+
+#Total Health
+Total_Health <- 230
+
+#Damage per Bullet
+DPB <- 61
+
+#Calling the function
+Bullets_to_Elimination(Total_Health,DPB)
+
+
+```
+The last set of formulas I want to use is  `standardization/Z-score` and `normalization`.
+These all play nicely together, however I normally use standarization. This allows me to view multiple values within the same category on a variety of scales. In this case I have 3 cateogries I break things into which are `close-range`, `mid-range`, `long-range`.
+
+However this package will not go that deep. 
+
+Standardization =
+- Value of Choice from Column X
+- Mean of Values of Column X
+- Standard Deviation of Column X
+
+FORMULA: `(Value - Mean)/(Standard Deviation)`
+
+Normalization = 
+- Value of choice from Column X 
+- Min Value of Column X
+- Max valaue of Column X
+
+FORMULA: `(Value - Min)/(Max-Min)`
+
+
+
+```{r}
+standardization <- function(Value,Mean, SD){
+  #Rounding to produce the first 2 decimal places
+  Standard_Value <- round((Value - Mean)/(SD),2)
+  return(Standard_Value)
+}
+
+Value <- 16
+Mean <- 46
+SD <- 26
+
+standardization(Value,Mean,SD)
+
+
+Normalization <- function(Value,Min, Max){
+  #Rounding to produce the first 2 decimal places
+  Normal_Value <- round((Value - Min)/(Max-Min),2)
+  return(Normal_Value)
+}
+
+Value <- 46
+Min <- 16
+Max <- 86
+
+Normalization(Value,Min,Max)
+
+
+
+```
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
